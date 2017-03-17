@@ -3,6 +3,7 @@
 //
 
 #import "PhotoGalleryVC.h"
+#import "ViewController.h"
 @interface PhotoGalleryVC ()<PHPhotoLibraryChangeObserver>
 {
 
@@ -43,16 +44,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     SCREEN_WIDTH = self.view.frame.size.width;
-
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(refreshingPhotos) name:@"RefreshingPhotos" object:nil];
-
-   
-//    for (UIViewController *vc in self.navigationController.viewControllers) {
-//        if ([vc isKindOfClass:[AddFeedVC class]]) {
-//            self.delegate=(AddFeedVC *)vc;
-//        }
-//    }
-    
     
     self.imageManager = [[PHCachingImageManager alloc] init];
     selectedIndexArr = [[NSMutableArray alloc] init];
@@ -60,7 +51,7 @@
     self.photoCollectionView.allowsMultipleSelection=YES;
    
     
-    self.imageManager = [[PHCachingImageManager alloc] init];
+   self.imageManager = [[PHCachingImageManager alloc] init];
    [self.imageManager stopCachingImagesForAllAssets];
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
     
@@ -70,37 +61,15 @@
     }
 
     
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[ViewController class]]) {
+            self.delegate=(ViewController *)vc;
+        }
+    }
     
-    [self getAllPhotosFromCamera];
+    
 
 }
--(void)refreshingPhotos{
-
- [selectedIndexArr removeAllObjects];
-//    [self.imageManager stopCachingImagesForAllAssets];
-//    
-//    
-//    if (!self.imageManager) {
-//        self.imageManager = [[PHCachingImageManager alloc] init];
-//
-//    }
-//    [self getAllPhotosFromCamera];
-//    [self.photoCollectionView reloadData];
-
-
-}
--(void)getAllPhotosFromCamera
-{
- 
-    
-  //  PHFetchResult *self.self.resultArr1=  [PHAssetCollection fetchAssetCollectionsWithALAssetGroupURLs:<#(nonnull NSArray<NSURL *> *)#> options:<#(nullable PHFetchOptions *)#>];
-
-    
- //   self.resultArr = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
-   // [self.photoCollectionView reloadData];
-   // [self.photoCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.resultArr.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
-}
-
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -170,7 +139,7 @@
 #pragma mark -  Collection view delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger totalCount=6-_photoCount;
+    NSInteger totalCount=30-_photoCount;
     if ([selectedIndexArr count]<totalCount){
         UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
         UIImageView *checked = (UIImageView*)[cell viewWithTag:3];
@@ -182,7 +151,6 @@
         checked = nil;
         cell = nil;
     }else{
-      //  [ProgressHUD showError:[NSString stringWithFormat:@"Maximum 6 photos can be uploaded."]];
         return;
     }
 }
@@ -222,95 +190,13 @@
         return;
     }
     
-   // [ProgressHUD show:@"Loading..." Interaction:NO];
-
-    __block  NSMutableArray *imageArray1 = [[NSMutableArray alloc] init];
- 
-    PHImageRequestOptions *requestOption=[[PHImageRequestOptions alloc]init];
-    requestOption.deliveryMode=PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    requestOption.version=PHImageRequestOptionsVersionOriginal;
-    requestOption.synchronous=YES;
-    requestOption.resizeMode=0;
+    [_delegate func_selectedPhotos:selectedIndexArr];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
-    for (PHAsset *asset in selectedIndexArr) {
-        dispatch_async( dispatch_get_main_queue(), ^{
-            [[PHImageManager defaultManager] requestImageForAsset:asset
-                                                       targetSize:PHImageManagerMaximumSize
-                                                      contentMode:PHImageContentModeAspectFit
-                                                          options:requestOption
-                                                      resultHandler:^(UIImage *result, NSDictionary *info) {
-                                                          
-                                                        if (result) {
-                                                        NSData *mydata=UIImageJPEGRepresentation(result, 1);
-                                                        NSData *ImageData;
-                                                        NSInteger totalKbCount=(int)round(mydata.length/1024);
-                                                        if (totalKbCount>1024*5) {
-                                                            ImageData=UIImageJPEGRepresentation(result, 0.1);
-                                                        }
-                                                        else if (totalKbCount>1024*4)
-                                                        {
-                                                            ImageData=UIImageJPEGRepresentation(result, 0.1);
-                                                        }
-                                                        else if (totalKbCount>1024*3)
-                                                        {
-                                                            ImageData=UIImageJPEGRepresentation(result, 0.2);
-                                                        }
-                                                        else if (totalKbCount>1024*2)
-                                                        {
-                                                            ImageData=UIImageJPEGRepresentation(result, 0.2);
-                                                        }
-                                                        else if (totalKbCount>1024)
-                                                        {
-                                                            ImageData=UIImageJPEGRepresentation(result, 0.4);
-                                                        }
-                                                        else{
-                                                            ImageData=UIImageJPEGRepresentation(result, 1);
-                                                            
-                                                        }
-                                                        NSLog(@"the lenght of image is %d", (int)round(ImageData.length/1024));
-                                                        [imageArray1 addObject:[UIImage imageWithData:ImageData]];
-                                                        if ([imageArray1 count]==[selectedIndexArr count]) {
-                                                            [_delegate func_selectedPhotos:imageArray1];
-                                                            [self CloseControllerAfterDoneAction];
-
-                                                        }
-                                                        }else{
-                                                        
-                                                            if (imageArray1.count !=0) {
-                                                                [_delegate func_selectedPhotos:imageArray1];
-                                                                
-                                                                
-                                                                [self CloseControllerAfterDoneAction];
-                                                  
-                                                            }else{
-
-                                                                return;
-
-                                                            
-                                                            }
-                                                            
-                                                            
-
-                                                        
-                                                        } }];
-                                               });
-                                        }
+    
 }
 - (IBAction)CloseControllerAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)CloseControllerAfterDoneAction{
-
-//    for (UIViewController *vc in self.navigationController.viewControllers) {
-//        if ([vc isKindOfClass:[AddFeedVC class]]) {
-//            [self.navigationController popToViewController:vc animated:NO];
-//            
-//        }
-   // }
-
-
-
 }
 
 

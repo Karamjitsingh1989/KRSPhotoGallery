@@ -57,10 +57,10 @@
 		31777DA21E7AA3E7000325DC /* KRSPhotoGallery */ = {
 			isa = PBXGroup;
 			children = (
-				31777DAE1E7AA488000325DC /* PhotoGalleryVC.h */,
-				31777DAF1E7AA488000325DC /* PhotoGalleryVC.m */,
 				31777DA31E7AA3E7000325DC /* KRSPhotoCell.h */,
 				31777DA41E7AA3E7000325DC /* KRSPhotoCell.m */,
+				31777DAE1E7AA488000325DC /* PhotoGalleryVC.h */,
+				31777DAF1E7AA488000325DC /* PhotoGalleryVC.m */,
 				31777DA51E7AA3E7000325DC /* KRSPhotoGalleryVC.h */,
 				31777DA61E7AA3E7000325DC /* KRSPhotoGalleryVC.m */,
 			);
@@ -313,6 +313,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G648K3L942;
 				INFOPLIST_FILE = KRSPhotoGallery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -325,6 +326,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G648K3L942;
 				INFOPLIST_FILE = KRSPhotoGallery/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

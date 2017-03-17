@@ -5,8 +5,6 @@
 #import "KRSPhotoCell.h"
 #import "PhotoGalleryVC.h"
 @import Photos;
-//static CGSize const kPopoverContentSize = {480, 720};
-
 @interface KRSPhotoGalleryVC ()<PHPhotoLibraryChangeObserver>
 
 
