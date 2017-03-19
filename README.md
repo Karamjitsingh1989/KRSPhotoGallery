@@ -2,8 +2,9 @@
 Custom gallery for multiple selection of images using collectionView.
 
 ## Screenshots
-![Screenshot](https://github.com/Karamjitsingh1989/KRSPhotoGallery/blob/master/KRSPhoto1.jpg)
-
+![Screenshot](https://github.com/Karamjitsingh1989/KRSPhotoGallery/blob/master/screebnShot1.jpg)
+![Screenshot](https://github.com/Karamjitsingh1989/KRSPhotoGallery/blob/master/Screenshot2.jpg)
+![Screenshot](https://github.com/Karamjitsingh1989/KRSPhotoGallery/blob/master/Screenshot3.jpg)
 
 # Author
 Karamjit singh (https://github.com/Karamjitsingh1989).
