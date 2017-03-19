@@ -1,8 +1,6 @@
 # KRSPhotoGallery
 Custom gallery for multiple selection of images using collectionView.
 
-![Alt text](http://i.imgur.com/E4r7Zde.gif "FAParallaxTutorialScreens-Gif")
-
 # Author
 Karamjit singh (https://github.com/Karamjitsingh1989).
 
@@ -17,4 +15,5 @@ KRSPhotoGallery requires iOS 10.0 or later.*
 
 # License
 This project is licensed under the Apache License 2.0.
+
 For more details visit http://www.apache.org/licenses/LICENSE-2.0
