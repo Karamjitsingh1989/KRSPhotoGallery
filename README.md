@@ -1,7 +1,9 @@
 # KRSPhotoGallery
 Custom gallery for multiple selection of images using collectionView.
 
-https://github.com/Karamjitsingh1989/KRSPhotoGallery/blob/master/KRSPhoto1.jpg
+## Screenshots
+![Screenshot](https://github.com/Karamjitsingh1989/KRSPhotoGallery/blob/master/KRSPhoto1.jpg)
+
 
 # Author
 Karamjit singh (https://github.com/Karamjitsingh1989).
