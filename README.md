@@ -21,6 +21,4 @@ KRSPhotoGallery requires iOS 10.0 or later.*
 * Listing of Albums then Show all images of specific album
 
 # License
-This project is licensed under the Apache License 2.0.
-
-For more details visit http://www.apache.org/licenses/LICENSE-2.0
+KRSPhotoGallery is available under the MIT license.
